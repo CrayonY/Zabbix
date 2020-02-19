@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: monitor
+server:
+  port: 8080
+logging:
+  level:
+    root: info
+
+
+zabbix:
+  url: http://10.47.97.116/zabbix/api_jsonrpc.php
+  username: Admin
+  password: zabbix

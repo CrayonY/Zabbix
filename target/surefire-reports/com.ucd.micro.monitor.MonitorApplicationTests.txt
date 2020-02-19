@@ -1,0 +1,17 @@
+-------------------------------------------------------------------------------
+Test set: com.ucd.micro.monitor.MonitorApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 6.077 s <<< FAILURE! - in com.ucd.micro.monitor.MonitorApplicationTests
+contextLoads(com.ucd.micro.monitor.MonitorApplicationTests)  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: java.lang.IllegalStateException: 
+Logback configuration error detected: 
+ERROR in ch.qos.logback.core.rolling.RollingFileAppender[DEBUG] - Failed to create parent directories for [/data/logs/debug.log]
+ERROR in ch.qos.logback.core.rolling.RollingFileAppender[DEBUG] - openFile(/data/logs/debug.log,true) call failed. java.io.FileNotFoundException: /data/logs/debug.log (No such file or directory)
+ERROR in ch.qos.logback.core.rolling.RollingFileAppender[INFO] - Failed to create parent directories for [/data/logs/info.log]
+ERROR in ch.qos.logback.core.rolling.RollingFileAppender[INFO] - openFile(/data/logs/info.log,true) call failed. java.io.FileNotFoundException: /data/logs/info.log (No such file or directory)
+ERROR in ch.qos.logback.core.rolling.RollingFileAppender[ERROR] - Failed to create parent directories for [/data/logs/error.log]
+ERROR in ch.qos.logback.core.rolling.RollingFileAppender[ERROR] - openFile(/data/logs/error.log,true) call failed. java.io.FileNotFoundException: /data/logs/error.log (No such file or directory)
+ERROR in ch.qos.logback.core.rolling.RollingFileAppender[perf4jFileAppender] - Failed to create parent directories for [/data/logs/perf4j.log]
+ERROR in ch.qos.logback.core.rolling.RollingFileAppender[perf4jFileAppender] - openFile(/data/logs/perf4j.log,true) call failed. java.io.FileNotFoundException: /data/logs/perf4j.log (No such file or directory)
+
