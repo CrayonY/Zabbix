@@ -1,6 +1,7 @@
 package com.ucd.micro.monitor.lambda;
 
 
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -66,8 +67,6 @@ public class LambdaMap {
 
 
         /** 5.转换为List<List<Map<String,Object></> [1,2,4]*/
-
-
 
         System.out.println("mapList"+mapList.toString());
         /** 4.转换为List<List<String> [1,2,4]*/
@@ -195,14 +194,11 @@ public class LambdaMap {
 
         });
 
-
         Map<String, Object> merged = mapListEquipment.stream()
-
                 .map(Map::entrySet).flatMap(Set::stream)
                 .distinct()
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         List<Map<String, Object>> lists = new ArrayList<>();
-
         lists.add(merged);
 
         System.out.println("lists"+lists.toString());
@@ -424,4 +420,109 @@ public class LambdaMap {
     //                    Collectors.mapping(map -> ((Number) map.get("uid")).intValue(),
     //                            Collectors.toList())));
 
+
+
+
+    /**
+     * @author Crayon
+     * @Description 对集合字段进行分组 eg：
+     * {
+     *     "code": "0",
+     *     "success": true,
+     *     "msg": "成功",
+     *     "data": {
+     *             {
+     *                 "stationname": "昆明火车南站",
+     *
+     *                 //"typeTong350kv": 32.90000,
+     *                 //"typeTong400kv": 32.90000,
+     *                 //"typeHuan350kv": 32.90000,
+     *                 //"typeHuan400kv": 32.90000,
+     *                  typeTongList: [
+     *                 {
+     *                   "typeTong350kv": 32.9,
+     *                   "typeTong400kv": 32.9
+     *                 }
+     *                 typeHuanList: [
+     *                 {
+     *                   "typeHuan350kv": 32.9,
+     *                   "typeHuan400kv": 32.9
+     *                 }
+     *                 "350kv": "20",
+     *                 "400kv": "30"
+     *             },
+     *             {
+     *                 "stationname": "昆明东站",
+     *                 //"typeTong350kv": 52.90000,
+     *                 //"typeTong400kv": 52.90000,
+     *                 //"typeHuang350kv": 52.90000,
+     *                 //"typeHuang400kv": 52.90000,
+     *                  typeTongList: [
+     *                 {
+     *                   "typeTong350kv": 52.9,
+     *                   "typeTong400kv": 52.9,
+     *                 }
+     *                 typeHuanList: [
+     *                 {
+     *                   "typeHuan350kv": 52.9,
+     *                   "typeHuan400kv": 52.9,
+     *                 }
+     *                 "350kv": "20",
+     *                 "400kv": "30"
+     *             }
+     *     }
+     * }
+     * @date 2020/2/19 10:15 上午
+     * @params []
+     * @exception
+     * @return void
+     */
+    @Test
+    public void kafkaListGroup(){
+        // Collectors.joining(",")  Collectors.toList()
+        Map<String, Object> map1 = new HashMap<>(16);
+        Map<String, Object> map2 = new HashMap<>(16);
+        //Map<String, Object> map3 = new HashMap<>(16);
+        List<Map<String, Object>> mapList = new ArrayList<>();
+        map1.put("stationname","昆明火车南站");
+        map1.put("350kv","9178");
+        map1.put("400kv","10110");
+        map1.put("typeTong350kv",32.9);
+        map1.put("typeTong400kv",32.9);
+        map1.put("typeHuan350kv",32.9);
+        map1.put("typeHuan400kv",32.9);
+
+
+        map2.put("stationname","昆明北站");
+        map2.put("350kv","9178");
+        map2.put("400kv","10110");
+        map2.put("typeTong350kv",52.9);
+        map2.put("typeTong400kv",52.9);
+        map2.put("typeHuan350kv",52.9);
+        map2.put("typeHuan400kv",52.9);
+
+        mapList.add(map1);
+        mapList.add(map2);
+
+        System.out.println("测试输出格式"+ mapList.toString());
+
+            List<Map<String, Object>> list = new ArrayList<>();
+            JSONObject js = new JSONObject();
+            mapList.forEach(mm -> {
+                js.put("stationname", mm.get("stationname"));
+                js.put("350kv", mm.get("350kv"));
+                js.put("400kv", mm.get("400kv"));
+                JSONObject typeTongList = new JSONObject();
+                typeTongList.put("typeTong350kv", mm.get("typeTong350kv"));
+                typeTongList.put("typeTong400kv", mm.get("typeTong400kv"));
+
+                JSONObject typeHuanList = new JSONObject();
+                typeHuanList.put("typeHuan350kv", mm.get("typeHuan350kv"));
+                typeHuanList.put("typeHuan400kv", mm.get("typeHuan400kv"));
+                js.put("typeTongList", typeTongList);
+                js.put("typeHuanList", typeHuanList);
+            });
+        System.out.println("给前端传输的格式要求"+js.toString());
+
+    }
 }

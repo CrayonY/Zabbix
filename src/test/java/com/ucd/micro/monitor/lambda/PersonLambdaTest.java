@@ -1,9 +1,10 @@
 package com.ucd.micro.monitor.lambda;
 
 import com.alibaba.fastjson.JSON;
-import com.ucd.visualization.common.ApiResultType;
-import com.ucd.visualization.common.ResultVO;
-import com.ucd.visualization.custom.layout.model.Person;
+
+import com.ucd.micro.monitor.model.Person;
+import com.ucd.micro.monitor.util.ApiResultType;
+import com.ucd.micro.monitor.util.ResultVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,6 +1,6 @@
 package com.ucd.micro.monitor.lambda;
 
-import com.ucd.visualization.custom.layout.model.Person;
+import com.ucd.micro.monitor.model.Person;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
