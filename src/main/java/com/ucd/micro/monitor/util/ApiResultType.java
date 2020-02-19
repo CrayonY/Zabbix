@@ -65,7 +65,7 @@ public enum ApiResultType {
 
     }
 
-    private ApiResultType(String code, String languageKey, String message) {
+    ApiResultType(String code, String languageKey, String message) {
         this.code = code;
         this.languageKey = languageKey;
         this.message = message;

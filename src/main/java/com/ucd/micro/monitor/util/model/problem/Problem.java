@@ -27,7 +27,7 @@ public class Problem extends ZabbixApiMethod {
 
         try {
             String responseJson = this.sendRequest(requestJson);
-            response = (ProblemGetResponse)gson.fromJson(responseJson, ProblemGetResponse.class);
+            response = gson.fromJson(responseJson, ProblemGetResponse.class);
             return response;
         } catch (ZabbixApiException var6) {
             throw new ZabbixApiException(var6);

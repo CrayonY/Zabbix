@@ -394,11 +394,7 @@ public class NewDateUtil {
         beginTime.setTime(begin);
         Calendar endTime = Calendar.getInstance();
         endTime.setTime(end);
-        if (nowTime.before(endTime) && nowTime.after(beginTime)) {
-            return true;
-        } else {
-            return false;
-        }
+        return nowTime.before(endTime) && nowTime.after(beginTime);
 
     }
 
